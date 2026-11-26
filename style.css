@@ -1,0 +1,252 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background-color: #12141a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+#game-container {
+  position: relative;
+  width: 420px;
+  height: 750px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #2c313c;
+}
+
+canvas {
+  display: block;
+  background: linear-gradient(180deg, #1e2430 0%, #2a3242 100%);
+  cursor: ew-resize;
+}
+
+/* 頂部 HUD 狀態列 */
+#hud-bar {
+  position: absolute;
+  top: 34px;
+  left: 44px;
+  right: 44px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.hud-badge {
+  background: rgba(15, 20, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.coin-badge {
+  color: #feca57;
+  border-color: rgba(254, 202, 87, 0.4);
+}
+
+/* 戰前基地升級商店 */
+#shop-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 20, 28, 0.92);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 48px 28px;
+  color: #fff;
+  z-index: 10;
+}
+
+#shop-overlay.hidden,
+#overlay.hidden {
+  display: none;
+}
+
+.shop-header {
+  text-align: center;
+}
+
+.stage-tag {
+  display: inline-block;
+  background: rgba(0, 210, 255, 0.18);
+  color: #00d2ff;
+  border: 1px solid #00d2ff;
+  padding: 4px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.shop-header h2 {
+  font-size: 30px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.coin-display {
+  font-size: 18px;
+  font-weight: bold;
+  color: #feca57;
+}
+
+.upgrade-cards {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.upgrade-card {
+  background: #1e2533;
+  border: 2px solid #2f3a4f;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.2s;
+}
+
+.upgrade-card:hover {
+  border-color: #00d2ff;
+}
+
+.upgrade-card:active {
+  transform: scale(0.98);
+}
+
+.card-icon {
+  font-size: 32px;
+  background: #283142;
+  width: 54px;
+  height: 54px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-title {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.lv-tag {
+  font-size: 12px;
+  color: #00d2ff;
+  background: rgba(0, 210, 255, 0.15);
+  padding: 2px 6px;
+  border-radius: 6px;
+  margin-left: 4px;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: #a4b0be;
+}
+
+.buy-btn {
+  background: #feca57;
+  color: #1e272e;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 82px;
+}
+
+.buy-btn.disabled {
+  background: #4b5563;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+#start-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #fff;
+  background: linear-gradient(90deg, #0097e6, #00d2ff);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 210, 255, 0.35);
+  transition: transform 0.1s;
+}
+
+#start-btn:active {
+  transform: scale(0.97);
+}
+
+/* 結算畫面 */
+#overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 18, 25, 0.88);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  gap: 16px;
+  z-index: 20;
+}
+
+#overlay h1 {
+  font-size: 38px;
+  letter-spacing: 2px;
+}
+
+#reward-box {
+  background: rgba(254, 202, 87, 0.15);
+  border: 1px solid #feca57;
+  color: #feca57;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+#restart-btn {
+  padding: 14px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: #00a8ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: transform 0.1s;
+}
+
+#restart-btn:active {
+  transform: scale(0.95);
+}

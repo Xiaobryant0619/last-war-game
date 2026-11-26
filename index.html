@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Last War 網頁版 - 基地升級版</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="gameCanvas" width="420" height="750"></canvas>
+
+    <!-- 頂部狀態資訊 (關卡與金幣) -->
+    <div id="hud-bar">
+      <div class="hud-badge">STAGE <span id="hud-stage">1</span></div>
+      <div class="hud-badge coin-badge">💰 <span id="hud-coins">0</span></div>
+    </div>
+
+    <!-- 戰前基地升級商店 -->
+    <div id="shop-overlay">
+      <div class="shop-header">
+        <div class="stage-tag">第 <span id="shop-stage">1</span> 關 戰前整備</div>
+        <h2>指揮官基地</h2>
+        <div class="coin-display">持有金幣：💰 <span id="shop-coins">0</span></div>
+      </div>
+
+      <div class="upgrade-cards">
+        <div class="upgrade-card" id="btn-upgrade-troop">
+          <div class="card-icon">🪖</div>
+          <div class="card-info">
+            <div class="card-title">初始兵力 <span class="lv-tag">Lv.<span id="lv-troop">1</span></span></div>
+            <div class="card-desc">開局人數：<span id="val-troop">6</span> 人</div>
+          </div>
+          <button class="buy-btn">💰 <span id="cost-troop">50</span></button>
+        </div>
+
+        <div class="upgrade-card" id="btn-upgrade-dmg">
+          <div class="card-icon">🔥</div>
+          <div class="card-info">
+            <div class="card-title">武器火力 <span class="lv-tag">Lv.<span id="lv-dmg">1</span></span></div>
+            <div class="card-desc">傷害加成：<span id="val-dmg">+0%</span></div>
+          </div>
+          <button class="buy-btn">💰 <span id="cost-dmg">60</span></button>
+        </div>
+      </div>
+
+      <button id="start-btn">出擊！START</button>
+    </div>
+
+    <!-- 結算畫面 -->
+    <div id="overlay" class="hidden">
+      <h1 id="overlay-title">VICTORY!</h1>
+      <p id="overlay-desc">成功突破防線</p>
+      <div id="reward-box">本局獲得：💰 +<span id="earned-coins">0</span></div>
+      <button id="restart-btn">返回基地整備</button>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
