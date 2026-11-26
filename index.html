@@ -2,59 +2,78 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Last War 網頁版 - 基地升級版</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>LAST WAR - 末日突圍戰線</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="game-container">
-    <canvas id="gameCanvas" width="420" height="750"></canvas>
-
-    <!-- 頂部狀態資訊 (關卡與金幣) -->
-    <div id="hud-bar">
-      <div class="hud-badge">STAGE <span id="hud-stage">1</span></div>
-      <div class="hud-badge coin-badge">💰 <span id="hud-coins">0</span></div>
+  <div id="game-wrapper">
+    <!-- 頂部狀態欄 HUD -->
+    <div id="hud">
+      <div class="hud-pill">
+        <span class="hud-label">關卡 / 波次</span>
+        <span id="hud-stage" class="hud-value stage-color">1</span>
+      </div>
+      <div class="hud-pill">
+        <span class="hud-label">軍團金幣</span>
+        <span class="hud-value coin-color">💰 <span id="hud-coins">0</span></span>
+      </div>
     </div>
 
-    <!-- 戰前基地升級商店 -->
-    <div id="shop-overlay">
+    <!-- 遊戲主畫布 -->
+    <canvas id="gameCanvas" width="390" height="680"></canvas>
+
+    <!-- 科技升級基地覆蓋層 -->
+    <div id="shop-overlay" class="panel-overlay hidden">
       <div class="shop-header">
-        <div class="stage-tag">第 <span id="shop-stage">1</span> 關 戰前整備</div>
-        <h2>指揮官基地</h2>
-        <div class="coin-display">持有金幣：💰 <span id="shop-coins">0</span></div>
-      </div>
-
-      <div class="upgrade-cards">
-        <div class="upgrade-card" id="btn-upgrade-troop">
-          <div class="card-icon">🪖</div>
-          <div class="card-info">
-            <div class="card-title">初始兵力 <span class="lv-tag">Lv.<span id="lv-troop">1</span></span></div>
-            <div class="card-desc">開局人數：<span id="val-troop">6</span> 人</div>
-          </div>
-          <button class="buy-btn">💰 <span id="cost-troop">50</span></button>
-        </div>
-
-        <div class="upgrade-card" id="btn-upgrade-dmg">
-          <div class="card-icon">🔥</div>
-          <div class="card-info">
-            <div class="card-title">武器火力 <span class="lv-tag">Lv.<span id="lv-dmg">1</span></span></div>
-            <div class="card-desc">傷害加成：<span id="val-dmg">+0%</span></div>
-          </div>
-          <button class="buy-btn">💰 <span id="cost-dmg">60</span></button>
+        <h2>🛠️ 科技升級基地</h2>
+        <div class="shop-status">
+          <span>進度：第 <b id="shop-stage">1</b> 關</span>
+          <span>•</span>
+          <span class="coin-color">💰 <b id="shop-coins">0</b></span>
         </div>
       </div>
 
-      <button id="start-btn">出擊！START</button>
+      <div class="upgrade-list">
+        <!-- 升級項目 1：初始兵力 -->
+        <div id="btn-upgrade-troop" class="upgrade-card">
+          <div class="upgrade-info">
+            <div class="upgrade-title">👥 擴編初始小隊 <span class="lv-tag">Lv.<span id="lv-troop">1</span></span></div>
+            <div class="upgrade-desc">目前開局基礎人數：<b id="val-troop">15</b> 人</div>
+          </div>
+          <button class="buy-btn">
+            升級<br />💰 <span id="cost-troop">60</span>
+          </button>
+        </div>
+
+        <!-- 升級項目 2：武器火力 -->
+        <div id="btn-upgrade-dmg" class="upgrade-card">
+          <div class="upgrade-info">
+            <div class="upgrade-title">🔥 強化單兵火力 <span class="lv-tag">Lv.<span id="lv-dmg">1</span></span></div>
+            <div class="upgrade-desc">目前武器傷害加成：<b id="val-dmg">+0%</b></div>
+          </div>
+          <button class="buy-btn">
+            升級<br />💰 <span id="cost-dmg">75</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- game.js 會自動在此處動態插入：英雄大招強化卡、模式選擇器、小遊戲訓練場 -->
+
+      <button id="start-btn" class="primary-btn">開始戰鬥</button>
     </div>
 
-    <!-- 結算畫面 -->
-    <div id="overlay" class="hidden">
-      <h1 id="overlay-title">VICTORY!</h1>
-      <p id="overlay-desc">成功突破防線</p>
-      <div id="reward-box">本局獲得：💰 +<span id="earned-coins">0</span></div>
-      <button id="restart-btn">返回基地整備</button>
+    <!-- 戰鬥結算覆蓋層 -->
+    <div id="overlay" class="panel-overlay hidden">
+      <h1 id="overlay-title">STAGE CLEAR!</h1>
+      <p id="overlay-desc">成功突破防線！</p>
+      <div class="reward-box">
+        本局獲得賞金：<span class="coin-color">+<b id="earned-coins">0</b> 💰</span>
+      </div>
+      <button id="restart-btn" class="primary-btn">返回基地整頓</button>
     </div>
   </div>
+
   <script src="game.js"></script>
 </body>
 </html>
